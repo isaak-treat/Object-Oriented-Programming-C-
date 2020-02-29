@@ -1,0 +1,93 @@
+//Chapter 6, Programming Challenge 18: Paint job Estimator
+/* A painting company has determined that for every 110 square feet of wall space,
+* 1 gallon of paint and 8 hours of labor will be required. The company charges $25.00
+* per hour of labor. Write a modular program that allows the user to enter the number
+* of rooms that are to be painted and the price of the paint per gallon. It should also
+* ask for square feet of wall space in the rooms. It should then display the following data:
+* The number of gallons of paint required
+* The hours of labor required
+* The cost of the paint
+* The labor charges
+* The total cost of the paint job
+* Input validation: Do not accept a value less than 1 for the number of rooms. Do not accept
+* a value less than $10.00 for the price of the paint. Do not accept a negative value for square
+* footage of wall space.
+*/
+
+#include <iostream>
+#include <iomanip>
+using namespace std;
+
+void calculations(double, double, double);
+
+void calculations(double roomsNeeded, double squareFeet, double pricePerGallon) {	
+
+	double
+		gallonsNeeded,
+		totalPaint,
+		hoursOfLabor,
+		paintCost,
+		laborCharges,
+		totalCost;
+		
+	//Takes 110 sqr ft. for 1 gallon of paint
+	totalPaint = ((roomsNeeded * squareFeet) / 110.00);
+	
+	//Takes 110 sqr ft. for 8hrs of labor
+	hoursOfLabor = (((roomsNeeded * squareFeet) / 110.00) * 8.00);
+	
+	//Cost = How much paint cost per gallon * total amt of gallons
+	paintCost = pricePerGallon * totalPaint;
+	
+	//Labor is hours worked * hourly wage
+	laborCharges = hoursOfLabor * 25.00;
+	
+	//Total Cost is Cost of Paint + Cost of Labor
+	totalCost = paintCost + laborCharges;
+	
+	//Displaying Information
+	cout << fixed << showpoint << setprecision(2);
+	cout << endl << "The total paint needed is: " << totalPaint << " Gallons." << endl;
+	cout << "The hours of labor you need is: " << hoursOfLabor << endl;
+	cout << "The cost of the paint is: $" << paintCost << endl;
+	cout << "The cost of labor will be: $" << laborCharges << endl;
+	cout << "The TOTAL cost of the Paint Job is: $" << totalCost;
+
+
+}//calculations
+
+int main() {
+	
+	double roomsNeeded;
+	double squareFeet;
+	double pricePerGallon;
+	
+	//Gathering User Information
+	cout << "Enter the number of Rooms Needed: ";
+	cin >> roomsNeeded;
+	cout << "Enter the square feet per room: ";
+	cin >> squareFeet;
+	cout << "Enter the Price/Gallon of Paint: ";
+	cin >> pricePerGallon;
+	
+	
+	//Makes sure the user inputs values that are actual values
+	while(pricePerGallon < 10) {
+		cout << "Paint is not that cheap. Enter the real price: ";
+		cin >> pricePerGallon;
+	}
+	
+	while(roomsNeeded < 1) {
+		cout << "You need to be able to paint at least one room. Enter the real number: ";
+		cin >> roomsNeeded;
+	}
+	
+	while(squareFeet < 0) {
+		cout << "You can't have negative square feet. Give us the actual measurement: ";
+		cin >> squareFeet;		
+	}
+	
+	calculations(roomsNeeded, squareFeet, pricePerGallon);
+	 
+	return 0;
+}
