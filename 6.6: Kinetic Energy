@@ -1,0 +1,35 @@
+//Chapter 6, Programming Challenge 6: Kinetic Energy
+/* In physics, an object that is in motion is said to have kinetic energy.
+* Write a function named kineticEnergy that accepts an object's mass (in kilograms)
+* and velocity (in meters per second) as arguments. The function should return the amount
+* of kinetic energy that the ojbect has. Demonstrate the function by calling it in a program
+* that asks the user to enter values for mass and velocity.
+*/
+
+#include <iostream>
+#include <math.h>
+using namespace std;
+
+double kineticEnergy(double, double);
+
+double kineticEnergy(double mass, double velocity) {
+	
+	double totalKinetic;
+	totalKinetic = ((mass * pow(velocity, 2)) / 2);
+	cout << "Kinetic energy is " << totalKinetic;
+	return totalKinetic;
+}
+
+int main() {
+	
+	double user_mass;
+	double user_velocity;
+	
+	cout << "Enter mass: ";
+	cin >> user_mass;
+	cout << "Enter velocity: ";
+	cin >> user_velocity;
+	kineticEnergy(user_mass, user_velocity);
+	
+	return 0;
+}
