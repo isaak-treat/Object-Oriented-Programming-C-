@@ -1,0 +1,38 @@
+// Chapter 3, Programming Challenge 17: Math Tutor
+/* Write a program that can be used as a math tutor for a young student.
+* The program should display two random numbers to be added.
+* The program should then pause while the student works on the problem. When
+* the student is ready to check the answer, he or she can press a key and
+* the program will display the correct solution.
+*/
+
+#include <iostream>
+#include <cstdlib>
+using namespace std;
+
+int main()
+{
+    const int MIN_VALUE = 100, MAX_VALUE = 500;
+
+    int rand1, rand2, answer;
+
+    //Algorithm to generate Random Number 1 and Random Number 2
+    rand1 = (rand() % (MAX_VALUE - MIN_VALUE + 1)) + MIN_VALUE;
+    rand2 = (rand() % (MAX_VALUE - MIN_VALUE + 1)) + MIN_VALUE;
+
+	//Calculating the answer
+    answer = rand1 + rand2;
+    
+    //Prints question to user
+    cout << " " << rand1 << endl << "+" << rand2 << endl << "----" << endl;
+
+    //Prompts user when done
+    cout << endl << "When you have the answer, press enter.";
+    cin.get();
+    cout << endl;
+
+	//Gives correct answer
+    cout << " " << rand1 << endl << "+" << rand2 << endl << "----" << endl;
+    cout << " " << answer;
+    return 0;
+}
