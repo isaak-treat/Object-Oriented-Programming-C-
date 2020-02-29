@@ -1,0 +1,39 @@
+//Chapter 3, Programming Challenge 14: Monthly Sales Tax
+/* A retail company must file a monthly sales tax report listing the sales
+* for the month, the year, and the total amount collected at the cash register
+* (i.e. sales plus sales tax). Assume the state sales tax is 4 percent, and
+* the county sales tax is 2 percent.
+*/
+
+#include <iostream>
+using namespace std;
+
+int main() {
+
+	string month;
+	int year;
+	float totalIncome, productSales, salesTax, countySalesTax, totalSalesTax;
+	
+	//Prompting the user for input on Month, Year, & Total Sales
+	cout << "Enter the Month: ";
+	cin >> month;
+	cout << "Enter the Year: ";
+	cin >> year;
+	cout << "Enter Total Sales: ";
+	cin >> totalIncome;
+	
+	//Calculations
+	salesTax = (totalIncome * 0.04);
+	countySalesTax = (totalIncome * 0.02);
+	productSales = (totalIncome / 1.06);
+	totalSalesTax = (salesTax + countySalesTax);
+	
+	//Printing table:
+	cout << "Month: " << month << "\n" << "--------------------\n"
+		 << "Total Collected: \t $ " << totalIncome << endl
+		 << "Sales: \t\t\t $ " << productSales << endl
+		 << "County Sales Tax: \t $ " << countySalesTax << endl
+		 << "State Sales Tax: \t $ " << salesTax << endl
+		 << "Total Sales Tax: \t $ " << totalSalesTax;
+
+}
