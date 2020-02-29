@@ -1,0 +1,29 @@
+//Chapter 3, Programming Challenge 9: How Many Cookies?
+/* A bag of cookies holds 30 cookies. The calorie information on the bag claims there are
+* 10 "servings" in the bag and that a serving equals 300 calories. Write a program that
+* asks the user to input how many cookies he or she actually ate, then reports how
+* many total calories were consumed.
+*/
+
+#include <iostream>
+using namespace std;
+
+int main() {
+	
+	int cookies, caloriesEaten, SERVINGS_PER_BAG, TOTAL_CALORIES, CALORIES_PER_COOKIE;
+	
+	//Calculations to determine how many calories are in a single cookie
+	SERVINGS_PER_BAG    = 10;
+	TOTAL_CALORIES      = SERVINGS_PER_BAG * 300;
+	CALORIES_PER_COOKIE = TOTAL_CALORIES / 30;
+	
+	//Gathering input for how many cookies the user eats
+	cout << "How many cookies?\n";
+	cin >> cookies;
+		
+	//Printing out the number of calories the user ate
+	caloriesEaten = (cookies * CALORIES_PER_COOKIE);
+	cout << "Total calories consumed were: " << caloriesEaten;
+	
+	return 0;
+}
