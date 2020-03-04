@@ -1,0 +1,169 @@
+//Chapter 11, Programming Challenge 14: Inventory Bins
+/*Write a program that simulates inventory bins in a warehouse. Each bin holds a number of the
+* same type of parts. The program should use a structure that keeps the following data:
+* Description of the part kept in the bin
+* Number of parts in the bin
+* The program should have an array of 10 bins, initialized with the following data.
+* The program should have the following functions:
+* AddParts - increases a specified bin's part count by a specified number.
+* RemoveParts - decreases a specific bin's part count by a specified number.
+* When the program runs, it should repeat a loop that performs the following steps:
+* The user should see a list of what each bin holds and how many parts are in each bin. The
+* user can choose to either quit the program or select from a bin. When a bin is selected,
+* the user can either add parts to it or remove parts from it. The loop then repeats, showing
+* the updated bin data on the screen. 
+*/
+
+#include <iostream>
+#include <string>
+using namespace std;
+const int SIZE = 10;
+
+void printMenu(struct inventoryBins *);
+void addParts(struct inventoryBins * );
+void removeParts(struct inventoryBins *);
+struct inventoryBins * initializeBin(struct inventoryBins *);
+
+struct inventoryBins
+{
+	string binDescription;
+	int partsInBin;	
+};
+
+//Prints the menu to the user
+void printMenu(struct inventoryBins * inventoryBin)
+{
+	cout << "----------------------------------------------------------------" << endl
+		 << "Part Description \t \tNumber of Parts in the Bin"	   << endl
+		 << "----------------------------------------------------------------" << endl;
+		 
+	for(int i = 0;  i < SIZE; i++)
+	{
+		cout << (inventoryBin + i) -> binDescription << "\t\t\t\t"
+			 << (inventoryBin + i) -> partsInBin << endl;
+	}
+	
+	
+}
+
+//Adds a specified part to the inventory bins array
+void addParts(struct inventoryBins * inventoryBin)
+{
+	string userChoice;
+	int userInput;
+	cout << "Which part would you like to add to? " << endl;
+	cin >> userChoice;
+	cout << "How much would you like to increase it by?" << endl;
+	cin >> userInput;
+	
+	//Checking which bin to choose from, and validating input
+	for(int i = 0; i < SIZE; i++)
+	{
+		if(userChoice == inventoryBin[i].binDescription)
+			inventoryBin[i].partsInBin += userInput;
+		
+		if(inventoryBin[i].partsInBin > 30)
+			cout << "No bin can hold more than 30 parts.";
+		
+		if(userInput < 0)
+			cout << "Can not accept negative values.";
+	}
+}
+
+
+//Removes a specified part from the inventory bins array
+void removeParts(struct inventoryBins * inventoryBin)
+{
+	
+	string userChoice;
+	int userInput;
+	cout << "Which part would you like to remove from? " << endl;
+	cin >> userChoice;
+	cout << "How much would you like to decrease it by?" << endl;
+	cin >> userInput;
+	
+	//Checking which bin to choose from, and validating input
+	for(int i = 0; i < SIZE; i++)
+	{
+		if(userChoice == inventoryBin[i].binDescription)
+			inventoryBin[i].partsInBin -= userInput;
+		
+		if(userChoice != inventoryBin[i].binDescription)
+			cout << "Select a valid bin!" << endl;
+		
+		if(inventoryBin[i].partsInBin > 30)
+			cout << "No bin can hold more than 30 parts.";
+		
+		if(userInput < 0)
+			cout << "Can not accept negative values.";
+	}
+	
+}
+
+struct inventoryBins * initializeBin(struct inventoryBins * inventoryBin)
+{
+	//Initializing struct array with information given from problem
+	inventoryBin[0].binDescription = "Valve";
+	inventoryBin[0].partsInBin = 10;
+	inventoryBin[1].binDescription = "Bearing";
+	inventoryBin[1].partsInBin = 5;
+	inventoryBin[2].binDescription = "Bushing";
+	inventoryBin[2].partsInBin = 15;
+	inventoryBin[3].binDescription = "Coupling";
+	inventoryBin[3].partsInBin = 21;
+	inventoryBin[4].binDescription = "Flange";
+	inventoryBin[4].partsInBin = 7;
+	inventoryBin[5].binDescription = "Gear";
+	inventoryBin[5].partsInBin = 5;
+	inventoryBin[6].binDescription = "Gear Housing";
+	inventoryBin[6].partsInBin = 5;
+	inventoryBin[7].binDescription = "Vacuum Gripper";
+	inventoryBin[7].partsInBin = 25;
+	inventoryBin[8].binDescription = "Cable";
+	inventoryBin[8].partsInBin = 18;
+	inventoryBin[9].binDescription = "Rod";
+	inventoryBin[9].partsInBin = 12;	
+	
+	return inventoryBin;
+}
+
+int main()
+{
+	
+	int userChoice;
+	//Declaring struct array
+	struct inventoryBins * inventoryBin = new struct inventoryBins[SIZE];
+	initializeBin(inventoryBin);	
+		 
+	//Prints the menu	 
+	do
+	{	
+	printMenu(inventoryBin);
+	cout << "----------------------------------------------------------------" << endl
+		 << "Would you like to:" << endl
+		 << "1. Add a Part to the Bin" << endl
+		 << "2. Remove a Part from the Bin" << endl
+		 << "3. Exit the Program" << endl;
+	cin >> userChoice;
+	
+	//Gets user choice to determine which function to run
+	switch(userChoice)
+	{
+		case 1:
+				addParts(inventoryBin);
+				break;
+		case 2:
+				removeParts(inventoryBin);
+				break;
+		case 3:
+				cout << "Have a great day!";
+				break;
+		default:
+				cout << "Select an option!" << endl;
+				break;
+	}
+		 
+	}while(userChoice != 3);
+
+	return 0;
+}
